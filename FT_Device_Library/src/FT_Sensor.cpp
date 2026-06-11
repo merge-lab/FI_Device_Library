@@ -10,10 +10,15 @@ float AnalogSensor::get_normalized_reading() const
 
 float AnalogSensor::get_pressure() const
 {
-    return (get_normalized_reading() * scale) - offset;
+    return (get_normalized_reading() * (2*scale)) - offset;
 }
 
-float DigitalSensor::get_pressure() const
+float AnalogSensor::get_raw_data() const
+{
+    return get_normalized_reading();
+}
+
+uint32_t DigitalSensor::retrieve_raw() const
 {
     Wire.beginTransmission(address);
     Wire.write(READ_CMD);
@@ -31,6 +36,17 @@ float DigitalSensor::get_pressure() const
 
     // skip temperature bytes
     Wire.read(); Wire.read(); Wire.read();
+    return raw;
+}
 
+float DigitalSensor::get_pressure() const
+{
+    uint32_t raw = retrieve_raw();
     return (raw - offset) * (2.0f * scale / FULL_SCALE);
+}
+
+float DigitalSensor::get_raw_data() const
+{
+    uint32_t raw = retrieve_raw();
+    return (float)raw;
 }

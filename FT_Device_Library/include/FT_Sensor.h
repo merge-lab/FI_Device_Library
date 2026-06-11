@@ -5,17 +5,25 @@
 #include <Arduino.h>
 #include <math.h>
 
+enum SENSOR_TYPE 
+{
+    UNASSIGNED,
+    DIGITAL_SENSOR,
+    ANALOG_SENSOR
+};
+
 /* 
 FT Sensor base class
 */
 class FT_Sensor
 {
 protected:
-    const int ID;       // sensor ID
-
+    const int ID;                               // sensor ID
+    const SENSOR_TYPE sensorType = UNASSIGNED;  // Type of sensor this is
+ 
 public:
     // Default constructor & destructor
-    FT_Sensor(int id) : ID(id){}
+    FT_Sensor(int id, SENSOR_TYPE st) : ID(id), sensorType(st){}
     virtual ~FT_Sensor() = default;
 
     /*
@@ -25,11 +33,24 @@ public:
     virtual float get_pressure() const = 0;
 
     /*
+    Every sensor must implement with whatever makes sense for it
+    Returns the raw sensor data value
+    */
+    virtual float get_raw_data() const = 0;
+
+    /*
     Returns the sensor id
     Input: None
     Output: int assigned sensor id
     */
     virtual int get_ID() const{ return ID; }
+
+    /*
+    Returns the type of sensor this is
+    Input: None
+    Output: SensorType of the given sensor
+    */
+    virtual SENSOR_TYPE get_sensor_type() { return sensorType; }
 };
 
 /*
@@ -51,7 +72,7 @@ public:
         scale           - sensor scaling factor (ex: 10 for L10D)
     */
     AnalogSensor(int id, int pin, float refV, int adcR, float minV, float maxV, 
-        float offset, float scale) : FT_Sensor(id), pin(pin), 
+        float offset, float scale) : FT_Sensor(id, ANALOG_SENSOR), pin(pin), 
         reference_voltage(refV), adc_resolution(adcR), min_volt(minV), 
         max_volt(maxV), offset(offset), scale(scale)
         {}
@@ -62,6 +83,13 @@ public:
     Output: Sensor pressure in inH20
     */
     float get_pressure() const override;
+
+    /*
+    Returns the normalized sensor reading
+    Input: None
+    Output: Normalized sensor reading (unitless)
+    */
+    float get_raw_data() const override;
 
 private:
     const int pin;                      // pin on the board 
@@ -94,14 +122,22 @@ public:
         offset              - calibrated sensor offset
     */
     DigitalSensor(int id, int scale, uint8_t address, float offset) : 
-        FT_Sensor(id), scale(scale), address(address), offset(offset){}
+        FT_Sensor(id, DIGITAL_SENSOR), scale(scale), address(address), offset(offset){}
 
     /*
     Returns sensor pressure
     Input : None
     Output: Sensor Pressure
     */
-    float get_pressure() const;
+    float get_pressure() const override;
+
+    /*
+    Returns the raw sensor data pre calculation
+    Input: None
+    Output: Raw sensor pressure data
+    */
+
+    float get_raw_data() const override;
 
 private:
     const uint8_t address;                              // Address on the i2c bus
@@ -109,6 +145,14 @@ private:
     const int scale;                                    // sensor scale factor, ex 10 for L10D or 30 for L30D
     static constexpr uint8_t READ_CMD = 0xAA;           // command to send to read
     static constexpr float FULL_SCALE = 16777216.0f;    // 2^24
+
+
+    /*
+    Returns the unsigned 32 bit raw sensor value
+    Input: None
+    Output: uint32_t of raw sensor data
+    */
+    uint32_t DigitalSensor::retrieve_raw() const;
 
 };
 
