@@ -7,9 +7,10 @@
 
 enum SENSOR_TYPE 
 {
-    UNASSIGNED,
-    DIGITAL_SENSOR,
-    ANALOG_SENSOR
+    INVALID,            // used for error cases
+    UNASSIGNED,         // if someone makes a wack sensor version, default case
+    DIGITAL_SENSOR,     // is a digital sensor
+    ANALOG_SENSOR       // is an analog sensor
 };
 
 /* 

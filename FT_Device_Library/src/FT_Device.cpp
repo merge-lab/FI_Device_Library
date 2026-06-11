@@ -41,3 +41,17 @@ std::vector<float> FT_Device::get_all_pressures()
     }
     return pressures;
 }
+
+SENSOR_TYPE FT_Device::get_sensor_type(int id)
+{
+    if(id < 0 || id >= sensors.size()){return INVALID;}
+
+    return sensors[id]->get_sensor_type();
+}
+
+float FT_Device::get_raw_data(int id)
+{
+    if(id < 0 || id >= sensors.size()) {return NAN;}  
+
+    return sensors[id]->get_raw_data();
+}

@@ -59,6 +59,22 @@ public:
     */
     std::vector<float> get_all_pressures();
 
+    /*
+    Get type of this sensor
+    Input: int id of sensor accessed in order of sensor addition / creation
+    Output: SENSOR_TYPE value of this sensor. Import FT_SENSOR.h to parse
+        or SENSOR_TYPE.INVALID if not a valid id
+    */
+    SENSOR_TYPE get_sensor_type(int id);
+
+    /*
+    Returns the raw value of this sensor
+    Input: None
+    Output: Raw value for given sensor, units depending on sensortype
+        or NAN if not a valid id
+    */
+    float get_raw_data(int id);
+
 private:
     const char* name;                           // name of this device 
     std::vector<FT_Sensor*> sensors;            // sensors on this device
