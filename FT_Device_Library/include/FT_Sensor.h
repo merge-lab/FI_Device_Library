@@ -28,6 +28,12 @@ public:
     virtual ~FT_Sensor() = default;
 
     /*
+    theoretical / intended behavior is to return sensor pressure in inH20.
+    Note that, although these calculations should work given the right 
+    constants, in practice it is likely only a basic approximation and both 
+    calibration and more refined non-linear models may be neccesary for more 
+    accurate results
+
     Every sensor must implement
     Returns sensor pressure in inH20
     */

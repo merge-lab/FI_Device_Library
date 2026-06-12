@@ -44,7 +44,12 @@ public:
     bool add_digital_sensor(int scale, uint8_t address, float offset);
 
     /*
-    Returns pressure at given sensor
+    theoretical / intended behavior is to return sensor pressure in inH20.
+    Note that, although these calculations should work given the right 
+    constants, in practice it is likely only a basic approximation and both 
+    calibration and more refined non-linear models may be neccesary for more 
+    accurate results
+
     Input: int id of sensor accessed in order of sensor addition / creation
     Output: float pressure at given sensor
         or NAN if id invalid
@@ -52,7 +57,12 @@ public:
     float get_pressure(int id);
 
     /*
-    Return vector of pressure of all sensors
+    theoretical / intended behavior is to return sensor pressure in inH20.
+    Note that, although these calculations should work given the right 
+    constants, in practice it is likely only a basic approximation and both 
+    calibration and more refined non-linear models may be neccesary for more 
+    accurate results
+
     Input: none
     Output: Vector<float> of sensor pressures
         In order of sensor creation (ie: sensor 0's pressure is at vector[0])
