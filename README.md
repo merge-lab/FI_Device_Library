@@ -1,7 +1,7 @@
 # FT DEVICE LIBRARY
 Library for the abstraction of FT Devices on embedded microcontrollers such as ESP32
 Supports:
-- DLHR-L01D Analog Transducer: implemented and tested
+- DLHR-L01D Analog Transducer: implemented and moderately tested
 - DLHR-L10D and DLH-L30D Digital Transducers: implemented but as of yet untested
 
 ## OVERVIEW
@@ -12,9 +12,9 @@ The intended use is for the user to create FT_Device objects to access their sen
 ### FT_SENSOR (FT_Sensor.h & FT_Sensor.cpp)
 Each individual sensor is represented by an object of the FT_Sensor class. This class exposes the following functions:
 - int get_ID() : returns the sensor's id number, assigned at creation
-- float get_pressure() : returns the sensor pressure in inH20
+- float get_pressure() : theoretical / intended behavior is to return sensor pressure in inH20. Note that, although these calculations *should* work given the right constants, in practice it is likely only a basic approximation and both calibration and more refined non-linear models may be neccesary for more accurate results
 - float get_raw_data() : returns whatever the appropriate unitless raw data is for the given sensor
-- SENSOR_TYPE get_sensor_type() : returns what kind of sensor this has been assigned as\
+- SENSOR_TYPE get_sensor_type() : returns what kind of sensor this has been assigned as
 
 The FT_Sensor class itself is simply a template class off of which other, more descript classes are implemented. This structure allows us to create new types of FT_Sensors, while abstracting all FT_Sensors to the same thing for the purposes of higher level use, data structure storage, etc. Current implementations of FT_Sensor include: 
 
