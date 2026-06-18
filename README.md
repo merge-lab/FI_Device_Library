@@ -1,4 +1,5 @@
 # FI DEVICE LIBRARY
+## NOTE: Most of this library and its documentation mistakenly uses 'FT' instead of 'FI'. This will be fixed soon.
 Library for the abstraction of FT Devices on embedded microcontrollers such as ESP32
 Supports:
 - DLHR-L01D Analog Transducer: implemented and moderately tested
