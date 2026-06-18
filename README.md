@@ -15,6 +15,7 @@ Each individual sensor is represented by an object of the FI_Sensor class. This 
 - float get_pressure() : theoretical / intended behavior is to return sensor pressure in inH20. Note that, although these calculations *should* work given the right constants, in practice it is likely only a basic approximation and both calibration and more refined non-linear models may be neccesary for more accurate results
 - float get_raw_data() : returns whatever the appropriate unitless raw data is for the given sensor
 - SENSOR_TYPE get_sensor_type() : returns what kind of sensor this has been assigned as
+- int get_status() : returns the int representation of the sensor status. Sensors are expected to implement a public enum of sensor status's they can have. Unfortunately, this cannot return the casted enum value directly, but when used with get_sensor_type() in a switch case, should be able to cast to the given enum's value.
 
 The FI_Sensor class itself is simply a template class off of which other, more descript classes are implemented. This structure allows us to create new types of FI_Sensors, while abstracting all FI_Sensors to the same thing for the purposes of higher level use, data structure storage, etc. Current implementations of FI_Sensor include: 
 
@@ -31,6 +32,10 @@ For sensors such as the DLHR-L01D analog transducer. The constructor parameters 
 
 To calculate pressure, it takes an analog read, converts the adc value to a voltage, normalizes the voltage to be between min and max volts, and then runs the formula pressure = (normalized_reading * (2*scale)) - offset. Note: this pressure calculation attempts to return a value in inH20. However, in practice these values are quite small, so if greater deltas are desired, increasing the scaling factor may be useful.
 
+Status Values: (Note that get status always returns On since off doesn't really make that much sense)
+- ON
+- OFF 
+
 #### DigitalSensor
 For sensors such as the DLHR-L10D and DLH-L30D digital transducers. The constructor parameters are as follows:
 - id                  : int id of this sensor
@@ -39,6 +44,14 @@ For sensors such as the DLHR-L10D and DLH-L30D digital transducers. The construc
 - offset              : calibrated sensor offset
 
 To calculate pressure, we make a request for the raw value, then convert it according to the formula pressure = (raw - offset) / (2.0 * scale / FULL_SCALE), where FULL_SCALE is 2^24.
+
+Status Values:
+- OK
+- BUSY
+- MEMORY_ERROR
+- ALU_ERROR
+- I2C_ERROR
+- TIMEOUT
 
 ### FI_DEVICE (FI_Device.h & FI_Device.cpp)
 Represents a collection of sensors. For example, a single FORTE finger may be considered an FI_Device with 3 FI_Sensors, and a whole FORTE claw would have 2 FI_Devices.\
@@ -50,6 +63,7 @@ The following functions are exposed:
 - float get_raw_data(int id) : returns raw value of given sensor, based on what makes sense for the given sensor type. NAN if invalid sensor. See 'note on ids' for more info about sensor access
 - SENSOR_TYPE get_sensor_type(int id) : returns the type of the given sensor or SENSOR_TYPE.invalid if invalid sensor id. See 'note on ids' for more info about sensor access. Note that some environments may require you to import "FI_Sensor.h" in order to parse sensor type, since the enum is defined there.
 - std::vector<float> get_all_pressures() : returns a vector of pressures on all sensors, where sensor 0's pressure is at index 0, sensor 1's pressure is at index 1, etc. See 'note on ids' for more info about sensor access
+- int get_sensor_status(int id) returns the int value of the status of the given sensor, or -1 if invalid sensor id. See 'note on ids' for more info about sensor access. Note that you may have to use get_sensor_type() and access the sensor type's status enum DigitalSensor.DIGITAL_STATUS or AnalogSensor.ANALOG_STATUS to interpret this data.
 
 #### NOTE ON IDs:
 Sensor IDs are assigned in consecutive order, starting with 0, based on the order in which they are added. The first sensor added via a call to either add_analog_sensor() or add_digital_sensor() will be assigned id 0. The second sensor added via either of those will be assigned id 1. etc. 
