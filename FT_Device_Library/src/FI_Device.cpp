@@ -1,6 +1,6 @@
-#include "FT_Device.h"
+#include "FI_Device.h"
 
-bool FT_Device::add_analog_sensor(int pin, float refV, int adcR, float minV, float maxV, 
+bool FI_Device::add_analog_sensor(int pin, float refV, int adcR, float minV, float maxV, 
     float offset, float scale)
 {
     auto* sensor = new AnalogSensor(sensors.size(), pin, refV, adcR, minV, maxV, offset, scale);
@@ -14,7 +14,7 @@ bool FT_Device::add_analog_sensor(int pin, float refV, int adcR, float minV, flo
     return false;
 }
 
-bool FT_Device::add_digital_sensor(int scale, uint8_t address, float offset)
+bool FI_Device::add_digital_sensor(int scale, uint8_t address, float offset)
 {
     auto* sensor = new DigitalSensor(sensors.size(), scale, address, offset);
     if(sensor)
@@ -25,13 +25,13 @@ bool FT_Device::add_digital_sensor(int scale, uint8_t address, float offset)
     return false;
 }
 
-float FT_Device::get_pressure(int id)
+float FI_Device::get_pressure(int id)
 {
     if(id < 0 || id >= sensors.size()) {return NAN;}
     return sensors[id]->get_pressure();
 }
 
-std::vector<float> FT_Device::get_all_pressures()
+std::vector<float> FI_Device::get_all_pressures()
 {
     std::vector<float> pressures;
     pressures.reserve(sensors.size());
@@ -42,14 +42,14 @@ std::vector<float> FT_Device::get_all_pressures()
     return pressures;
 }
 
-SENSOR_TYPE FT_Device::get_sensor_type(int id)
+SENSOR_TYPE FI_Device::get_sensor_type(int id)
 {
     if(id < 0 || id >= sensors.size()){return INVALID;}
 
     return sensors[id]->get_sensor_type();
 }
 
-float FT_Device::get_raw_data(int id)
+float FI_Device::get_raw_data(int id)
 {
     if(id < 0 || id >= sensors.size()) {return NAN;}  
 

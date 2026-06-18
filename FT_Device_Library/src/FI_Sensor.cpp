@@ -1,4 +1,4 @@
-#include "FT_Sensor.h"
+#include "FI_Sensor.h"
 
 float AnalogSensor::get_normalized_reading() const
 {

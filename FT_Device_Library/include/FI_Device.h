@@ -1,30 +1,30 @@
-#ifndef FT_DEVICE_H
-#define FT_DEVICE_H
+#ifndef FI_DEVICE_H
+#define FI_DEVICE_H
 
 #include <Arduino.h>
 #include <vector>
-#include "FT_Sensor.h"
+#include "FI_Sensor.h"
 
 /* Can extend this to whatever sensor device you have if needed */
-class FT_Device
+class FI_Device
 {
 public:
     /*
     Constructor
     Input: name - the name of this device
     */
-    FT_Device(const char* name) : name(name){}
+    FI_Device(const char* name) : name(name){}
     
     /* Destructor */
-    ~FT_Device(){for(FT_Sensor* s : sensors) { delete s; } sensors.clear();}
+    ~FI_Device(){for(FI_Sensor* s : sensors) { delete s; } sensors.clear();}
 
     /* Disable copying */
-    FT_Device(const FT_Device&) = delete;
-    FT_Device& operator=(const FT_Device&) = delete;
+    FI_Device(const FI_Device&) = delete;
+    FI_Device& operator=(const FI_Device&) = delete;
 
     /* Disable moves */
-    FT_Device(FT_Device&&) = delete;
-    FT_Device& operator=(FT_Device&&) = delete;
+    FI_Device(FI_Device&&) = delete;
+    FI_Device& operator=(FI_Device&&) = delete;
 
     /*
     Adds a new analog sensor such as L01D
@@ -72,7 +72,7 @@ public:
     /*
     Get type of this sensor
     Input: int id of sensor accessed in order of sensor addition / creation
-    Output: SENSOR_TYPE value of this sensor. Import FT_SENSOR.h to parse
+    Output: SENSOR_TYPE value of this sensor. Import FI_SENSOR.h to parse
         or SENSOR_TYPE.INVALID if not a valid id
     */
     SENSOR_TYPE get_sensor_type(int id);
@@ -87,7 +87,7 @@ public:
 
 private:
     const char* name;                           // name of this device 
-    std::vector<FT_Sensor*> sensors;            // sensors on this device
+    std::vector<FI_Sensor*> sensors;            // sensors on this device
 };
 
 #endif

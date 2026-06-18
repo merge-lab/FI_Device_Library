@@ -1,5 +1,5 @@
-#ifndef FT_SENSOR_H
-#define FT_SENSOR_H
+#ifndef FI_SENSOR_H
+#define FI_SENSOR_H
 
 #include <Wire.h>
 #include <Arduino.h>
@@ -14,9 +14,9 @@ enum SENSOR_TYPE
 };
 
 /* 
-FT Sensor base class
+FI Sensor base class
 */
-class FT_Sensor
+class FI_Sensor
 {
 protected:
     const int ID;                               // sensor ID
@@ -24,8 +24,8 @@ protected:
  
 public:
     // Default constructor & destructor
-    FT_Sensor(int id, SENSOR_TYPE st) : ID(id), sensorType(st){}
-    virtual ~FT_Sensor() = default;
+    FI_Sensor(int id, SENSOR_TYPE st) : ID(id), sensorType(st){}
+    virtual ~FI_Sensor() = default;
 
     /*
     theoretical / intended behavior is to return sensor pressure in inH20.
@@ -63,7 +63,7 @@ public:
 /*
 Class for Analog Sensors operating under same principles as DLHR-L01D
 */
-class AnalogSensor : public FT_Sensor
+class AnalogSensor : public FI_Sensor
 {
 public:
     /*
@@ -79,7 +79,7 @@ public:
         scale           - sensor scaling factor (ex: 10 for L10D)
     */
     AnalogSensor(int id, int pin, float refV, int adcR, float minV, float maxV, 
-        float offset, float scale) : FT_Sensor(id, ANALOG_SENSOR), pin(pin), 
+        float offset, float scale) : FI_Sensor(id, ANALOG_SENSOR), pin(pin), 
         reference_voltage(refV), adc_resolution(adcR), min_volt(minV), 
         max_volt(maxV), offset(offset), scale(scale)
         {}
@@ -117,7 +117,7 @@ private:
 /*
 Class for Digital i2c sensors operating under same principles as DLHR-L10D and DLH-L30D
 */
-class DigitalSensor : public FT_Sensor
+class DigitalSensor : public FI_Sensor
 {
 public:
     /*
@@ -129,7 +129,7 @@ public:
         offset              - calibrated sensor offset
     */
     DigitalSensor(int id, int scale, uint8_t address, float offset) : 
-        FT_Sensor(id, DIGITAL_SENSOR), scale(scale), address(address), offset(offset){}
+        FI_Sensor(id, DIGITAL_SENSOR), scale(scale), address(address), offset(offset){}
 
     /*
     Returns sensor pressure
