@@ -58,6 +58,12 @@ public:
     Output: SensorType of the given sensor
     */
     virtual SENSOR_TYPE get_sensor_type() { return sensorType; }
+
+    /*
+    Returns the sensor status.
+    Expected to be implemented with the given sensor's status enum
+    */
+    virtual int get_status() const = 0;
 };
 
 /*
@@ -97,6 +103,19 @@ public:
     Output: Normalized sensor reading (unitless)
     */
     float get_raw_data() const override;
+
+    /*
+    Status enum for get_status()
+    Doesn't really make much sense for analog sensors but here for propriety
+    */
+    enum ANALOG_STATUS{ON = 1, OFF = 2};
+
+    /*
+    Returns the sensor status (which should always be on for analog sensors)
+    Input: None
+    Output: 1 (On)
+    */
+    int get_status() const override {return 1;}
 
 private:
     const int pin;                      // pin on the board 
@@ -143,8 +162,30 @@ public:
     Input: None
     Output: Raw sensor pressure data
     */
-
     float get_raw_data() const override;
+
+    /*
+    Possible sensor status's
+    */
+    enum DIGITAL_STATUS
+    {
+        OK = 0,
+        BUSY,
+        MEMORY_ERROR,
+        ALU_ERROR,
+        I2C_ERROR,
+        TIMEOUT
+    };
+
+    /*
+    Returns the last known status
+    Input: none
+    Output: last known sensor status
+    */
+    int get_status() const override
+    {
+        return static_cast<int>(last_status);
+    }
 
 private:
     const uint8_t address;                              // Address on the i2c bus
@@ -152,14 +193,16 @@ private:
     const int scale;                                    // sensor scale factor, ex 10 for L10D or 30 for L30D
     static constexpr uint8_t READ_CMD = 0xAA;           // command to send to read
     static constexpr float FULL_SCALE = 16777216.0f;    // 2^24
+    mutable DIGITAL_STATUS last_status = OK;            // last known status, updated at every read
 
 
     /*
     Returns the unsigned 32 bit raw sensor value
+    Also updates last_status
     Input: None
     Output: uint32_t of raw sensor data
     */
-    uint32_t DigitalSensor::retrieve_raw() const;
+    uint32_t retrieve_raw() const;
 
 };
 

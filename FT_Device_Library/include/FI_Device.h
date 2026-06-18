@@ -85,6 +85,15 @@ public:
     */
     float get_raw_data(int id);
 
+    /*
+    Returns sensor status. Interpret using get_sensor_type()
+    Input: int id of sensor accessed in order of sensor addition / creation
+    Output: int representation of sensor status enum.
+        or -1 if invalid id
+    */
+    int get_sensor_status(int id);
+
+
 private:
     const char* name;                           // name of this device 
     std::vector<FI_Sensor*> sensors;            // sensors on this device

@@ -55,3 +55,10 @@ float FI_Device::get_raw_data(int id)
 
     return sensors[id]->get_raw_data();
 }
+
+int FI_Device::get_sensor_status(int id)
+{
+    if(id < 0 || id >= sensors.size()) {return -1;}
+
+    return sensors[id]->get_status();
+}
