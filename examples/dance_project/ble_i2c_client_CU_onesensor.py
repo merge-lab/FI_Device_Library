@@ -4,6 +4,7 @@ import bluetooth
 from machine import Pin, I2C
 from neopixel import NeoPixel
 from time import time_ns
+# test comment
 
 ##################################################
 # I2C SETUP
