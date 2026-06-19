@@ -86,9 +86,13 @@ async def sensor_task():
             # print("addr:" + str(address))
             while not flag:
                 b = i2c.readfrom(PRESSURE_ADDR, 1)
-                # print("flag: " + str(b[0]))
-                flag = (b[0] == 0x40)
-                block = i2c.readfrom(PRESSURE_ADDR, 7)
+                print(b[0])
+                if b[0] in (0x41,0x44):
+                    flag = True
+                else:
+                    flag = (b[0] == 0x40)
+            
+            block = i2c.readfrom(PRESSURE_ADDR, 7)
             # print(list(map(hex,block)))
             
             # https://www.mouser.com/ProductDetail/Amphenol-All-Sensors/DLHR-L10D-E1BD-C-NAV8?qs=F5EMLAvA7IAG72p6SeJcnw%3D%3D            
@@ -102,6 +106,8 @@ async def sensor_task():
             print('sensor ' + str(address) + ' pressure : ' + str(pressure))
 
             sensor_characteristic.write(_encode_data([address, pressure, temperature, triggerIn.value(), time_ns()]), send_update=True)
+            if pressure > 10 or pressure == -12.5:
+                pressure = 10
             # print("Sensor " + str(address) + ": " + str(pressure) + ',' + str(temperature))
             
         await asyncio.sleep_ms(10)
