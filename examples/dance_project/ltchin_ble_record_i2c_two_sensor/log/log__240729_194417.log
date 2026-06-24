@@ -1,0 +1,9 @@
+2024-07-29 19:44:17,323 __main__ INFO: starting scan...
+2024-07-29 19:44:23,795 __main__ INFO: connecting to device...
+2024-07-29 19:44:30,423 __main__ INFO: connected
+2024-07-29 19:44:30,449 __main__ INFO: [Service] 00001800-0000-1000-8000-00805f9b34fb (Handle: 10): Generic Access Profile
+2024-07-29 19:44:31,147 __main__ INFO:   [Characteristic] 00002a00-0000-1000-8000-00805f9b34fb (Handle: 11): Device Name (read), Value: bytearray(b'MPY ESP32')
+2024-07-29 19:44:31,267 __main__ INFO:   [Characteristic] 00002a01-0000-1000-8000-00805f9b34fb (Handle: 13): Appearance (read), Value: bytearray(b'\x00\x00')
+2024-07-29 19:44:31,268 __main__ INFO: [Service] 00001801-0000-1000-8000-00805f9b34fb (Handle: 15): Generic Attribute Profile
+2024-07-29 19:44:31,268 __main__ INFO:   [Characteristic] 00002a05-0000-1000-8000-00805f9b34fb (Handle: 16): Service Changed (indicate)
+2024-07-29 19:44:31,388 __main__ INFO:     [Descriptor] 00002902-0000-1000-8000-00805f9b34fb (Handle: 18): Client Characteristic Configuration, Value: bytearray(b'\x00\x00')

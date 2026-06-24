@@ -1,0 +1,15 @@
+2024-07-29 19:45:54,277 __main__ INFO: starting scan...
+2024-07-29 19:45:55,014 __main__ INFO: connecting to device...
+2024-07-29 19:45:56,564 __main__ INFO: connected
+2024-07-29 19:45:56,589 __main__ INFO: [Service] 00001800-0000-1000-8000-00805f9b34fb (Handle: 10): Generic Access Profile
+2024-07-29 19:46:12,795 __main__ INFO: Disconnected callback called!
+2024-07-29 19:46:12,825 __main__ INFO:   [Characteristic] 00002a00-0000-1000-8000-00805f9b34fb (Handle: 11): Device Name (read), Error: Could not read characteristic handle 11: Unreachable
+2024-07-29 19:46:12,826 __main__ INFO:   [Characteristic] 00002a01-0000-1000-8000-00805f9b34fb (Handle: 13): Appearance (read), Error: Not connected
+2024-07-29 19:46:12,826 __main__ INFO: [Service] 00001801-0000-1000-8000-00805f9b34fb (Handle: 15): Generic Attribute Profile
+2024-07-29 19:46:12,827 __main__ INFO:   [Characteristic] 00002a05-0000-1000-8000-00805f9b34fb (Handle: 16): Service Changed (indicate)
+2024-07-29 19:46:12,828 __main__ ERROR:     [Descriptor] 00002902-0000-1000-8000-00805f9b34fb (Handle: 18): Client Characteristic Configuration, Error: Not connected
+2024-07-29 19:46:12,828 __main__ INFO: [Service] 19b10000-e8f2-537e-4f6c-d104768a1214 (Handle: 19): Unknown
+2024-07-29 19:46:12,829 __main__ INFO:   [Characteristic] 19b10001-e8f2-537e-4f6c-d104768a1214 (Handle: 20): Unknown (read,notify), Error: Not connected
+2024-07-29 19:46:12,830 __main__ ERROR:     [Descriptor] 00002902-0000-1000-8000-00805f9b34fb (Handle: 22): Client Characteristic Configuration, Error: Not connected
+2024-07-29 19:46:12,830 __main__ INFO:   [Characteristic] 19b10002-e8f2-537e-4f6c-d104768a1214 (Handle: 23): Unknown (read,write,notify), Error: Not connected
+2024-07-29 19:46:12,831 __main__ ERROR:     [Descriptor] 00002902-0000-1000-8000-00805f9b34fb (Handle: 25): Client Characteristic Configuration, Error: Not connected

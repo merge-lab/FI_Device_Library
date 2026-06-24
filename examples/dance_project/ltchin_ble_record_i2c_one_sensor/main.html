@@ -1,0 +1,50 @@
+<!-- Modified from https://RandomNerdTutorials.com/micropython-esp32-bluetooth-low-energy-ble/ and https://github.com/LudwigStumpp/ble-recorder -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ESP32 Web BLE Recorder</title>
+    <script src="p5.ble.js"></script>
+    <script src="chart.js"></script>
+</head>
+
+
+<!-- 
+***************************************************
+* HTML BODY
+* Determines visual elements of the web page
+***************************************************
+ -->
+
+<body>
+    <p style="font-size: 16pt;">
+        <b>Name your file here:</b> <input type="text" id="inputFileName" value="Untitled">
+        <button id="renameButton" onclick="rename()">Rename File</button>
+    </p>
+    <p style = "display: inline">
+        Current file name base is <div id="tellUserTheName" style="display:inline; font-size: 14pt; color: blue;"></div>
+    </p>
+    <hr>
+    <p>
+        <button id="connectBleButton" class="connectButton"> Connect and Record</button>
+        <button id="disconnectBleButton" class="disconnectButton">Stop Recording</button>
+        <p>BLE state: <strong><span id="bleState" style="color:#d13a30;">Disconnected</span></strong></p>
+        <p>Press F12 to see the browser console for debugging!</p>
+        <p>Make sure Bluetooth Adapter is set to NOT auto-shutoff</p>
+    </p>
+
+    <p>
+        <h2>Fetched Value</h2>
+        <p class="reading"><span id="valueContainer">NaN</span></p>
+        <p>Last reading: <span id="timestamp"></span></p>
+    </p>
+
+    <div class="chart-container" style="position: relative; height:60vh; width:120vw">
+    <!-- <div class="chart-container" style="position: relative"> -->
+      <canvas id="myChart"></canvas>
+    </div>
+</body>
+
+<footer>
+    <script src="record.js"></script> <!-- The logic is in here -->
+</footer>

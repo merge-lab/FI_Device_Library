@@ -1,0 +1,17 @@
+2026-05-19 11:53:20,620 __main__ INFO: starting scan...
+2026-05-19 11:53:22,236 __main__ INFO: connecting to device...
+2026-05-19 11:53:24,475 __main__ INFO: connected
+2026-05-19 11:53:24,477 __main__ INFO: [Service] 00001800-0000-1000-8000-00805f9b34fb (Handle: 1): Generic Access Profile
+2026-05-19 11:53:24,500 __main__ INFO:   [Characteristic] 00002a00-0000-1000-8000-00805f9b34fb (Handle: 2): Device Name (read), Value: bytearray(b'MPY ESP32')
+2026-05-19 11:53:24,530 __main__ INFO:   [Characteristic] 00002a01-0000-1000-8000-00805f9b34fb (Handle: 4): Appearance (read), Value: bytearray(b'\x00\x00')
+2026-05-19 11:53:24,533 __main__ INFO: [Service] 00001801-0000-1000-8000-00805f9b34fb (Handle: 6): Generic Attribute Profile
+2026-05-19 11:53:24,533 __main__ INFO:   [Characteristic] 00002a05-0000-1000-8000-00805f9b34fb (Handle: 7): Service Changed (indicate)
+2026-05-19 11:53:24,560 __main__ INFO:     [Descriptor] 00002902-0000-1000-8000-00805f9b34fb (Handle: 9): Client Characteristic Configuration, Value: bytearray(b'\x02\x00')
+2026-05-19 11:53:24,591 __main__ INFO:   [Characteristic] 00002b3a-0000-1000-8000-00805f9b34fb (Handle: 10): Server Supported Features (read), Value: bytearray(b'\x00')
+2026-05-19 11:53:24,627 __main__ INFO:   [Characteristic] 00002b29-0000-1000-8000-00805f9b34fb (Handle: 12): Client Supported Features (read,write), Value: bytearray(b'\x00')
+2026-05-19 11:53:24,640 __main__ INFO: [Service] 19b10000-e8f2-537e-4f6c-d104768a1214 (Handle: 14): Unknown
+2026-05-19 11:53:24,644 __main__ INFO:   [Characteristic] 19b10000-e8f2-537e-4f6c-d104768a1214 (Handle: 15): Unknown (notify,read), Error: Multiple Characteristics with this UUID, refer to your desired characteristic by the `handle` attribute instead.
+2026-05-19 11:53:24,666 __main__ INFO:     [Descriptor] 00002902-0000-1000-8000-00805f9b34fb (Handle: 17): Client Characteristic Configuration, Value: bytearray(b'\x00\x00')
+2026-05-19 11:53:24,667 __main__ INFO:   [Characteristic] 19b10000-e8f2-537e-4f6c-d104768a1214 (Handle: 18): Unknown (notify,read,write), Error: Multiple Characteristics with this UUID, refer to your desired characteristic by the `handle` attribute instead.
+2026-05-19 11:53:24,696 __main__ INFO:     [Descriptor] 00002902-0000-1000-8000-00805f9b34fb (Handle: 20): Client Characteristic Configuration, Value: bytearray(b'\x00\x00')
+2026-05-19 11:53:24,697 __main__ INFO: Disconnected callback called!

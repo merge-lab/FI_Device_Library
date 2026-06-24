@@ -1,0 +1,50 @@
+<!-- Modified from https://RandomNerdTutorials.com/micropython-esp32-bluetooth-low-energy-ble/ and https://github.com/LudwigStumpp/ble-recorder -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ESP32 Web BLE Recorder</title>
+    <script src="p5.ble.js"></script>
+    <script src="chart.js"></script>
+</head>
+
+
+<!-- 
+***************************************************
+* HTML BODY
+* Determines visual elements of the web page
+***************************************************
+ -->
+
+<body>
+    <p><h1><b>I2C Reader</b></h1></p>
+    <p>
+        <button id="connectBleButton" class="connectButton"> Connect and Record</button>
+        <button id="disconnectBleButton" class="disconnectButton">Stop Recording</button>
+        <p>BLE state: <strong><span id="bleState" style="color:#d13a30;">Disconnected</span></strong></p>
+        <p>Press F12 to see the browser console for debugging!</p>
+        <p>Make sure Bluetooth Adapter is set to NOT auto-shutoff</p>
+    </p>
+
+    <p>
+        <h2>Fetched Value</h2>
+        <p class="reading"><span id="valueContainer">NaN</span></p>
+        <p>Last reading: <span id="timestamp"></span></p>
+    </p>
+
+    <p>
+        <h2>LED Control</h2>
+        <button id="onButton" class="onButton">ON</button>
+        <button id="offButton" class="offButton">OFF</button>
+        <p>Last value sent: <span id="valueSent"></span></p>
+    </p>
+
+    <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+    <!-- <div class="chart-container" style="position: relative"> -->
+      <canvas id="myChart"></canvas>
+    </div>
+</body>
+
+<footer>
+    <script src="record.js"></script> <!-- The logic is in here -->
+</footer>
