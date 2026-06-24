@@ -1,4 +1,4 @@
-Open main.html for the javascript version or ble_i2c_client.py for the Python version.
+Open main.html for the javascript version or ble_i2c_client_CU_onesensor.py for the Python version.
 
 
 # File description:
@@ -7,7 +7,7 @@ Open main.html for the javascript version or ble_i2c_client.py for the Python ve
 * p5.ble.js and p5.ble.min.js -- a WebBluetooth library (https://itpnyu.github.io/p5ble-website/) . A bit black box so would be open to using a different library
 * chart.js -- library we use to generate the graph (https://www.chartjs.org/)
 
-* ble_i2c_client.py -- a Python version to connect to the ESP32 instead. Relies on bleak (https://github.com/hbldh/bleak) which relies on your Windows computer having the correct drivers setup (WinRT). I found this much flakier than the web version 
+* ble_i2c_client_CU_onesensor.py -- a Python version to connect to the ESP32 instead. Relies on bleak (https://github.com/hbldh/bleak) which relies on your Windows computer having the correct drivers setup (WinRT). I found this much flakier than the web version 
 
 
 # Important Windows Configuration
